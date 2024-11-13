@@ -6,14 +6,8 @@ export const registerAccount = createAsyncThunk("registerAccount" ,
   async (user, thunkAPI) => {
       const {rejectWithValue} = thunkAPI
       return adminAPI.post("/account/register",user)
-      .then(docs => {
-        console.log(data, 11)
-        return docs.data
-      })
-      .catch(err => {
-        console.log(err, 22)
-        return rejectWithValue(err.response.data || err)
-      })
+      .then(docs => docs.data)
+      .catch(err => rejectWithValue(err.response.data || err))
   })
 export const resendEmail = createAsyncThunk("resendEmail" ,
   async (email, thunkAPI) => {
