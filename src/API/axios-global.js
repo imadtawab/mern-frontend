@@ -2,6 +2,7 @@ import axios from 'axios'
 import decodedCookies from '../Admin/Utils/cookieUtils';
 
 const apiUrl = process.env.REACT_APP_SERVER_DOMAINE
+console.log("apiUrl:: ",apiUrl)
 const adminAPI = axios.create({
     baseURL: `${apiUrl}/admin`,
 })
