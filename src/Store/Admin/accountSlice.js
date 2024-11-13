@@ -218,10 +218,5 @@ const accountSlice = createSlice({
     },
 })
 
-<<<<<<< HEAD
-export const counterActions = accountSlice.actions
+export const accountActions = accountSlice.actions
 export default accountSlice.reducer
-=======
-// export const counterActions = accountSlice.actions
-export default accountSlice.reducer
->>>>>>> f9863acc63935a496fae6557fe93db3a0f74b76f
