@@ -61,7 +61,7 @@
                 }
             }
             .name{
-                color: var(--dark-color);
+                color: var(--text-color);
                 font-weight: 600;
                 font-size: 16px;
             }
@@ -128,7 +128,7 @@ display: grid;
 align-items: center;
 text-align: center;
 border-radius: 5px;
-color: var(--dark-color);
+color: var(--text-color);
 transition: all .3s;
                         &.active{
                             color: #fff;
@@ -159,13 +159,14 @@ text-transform: uppercase;
             }
         }
     }
+
     .prices {
         margin: 0 20px 20px 0;
     display: block;
     text-align: end;
     font-weight: bold;
     font-size: 17px;
-    color: var(--dark-color);
+    color: var(--text-color);
     span {
         color: var(--main-color);
     }
@@ -397,6 +398,9 @@ text-transform: uppercase;
                         -webkit-box-orient: vertical;
                         overflow: hidden;
                         -webkit-line-clamp: 2;
+                    }
+                    .rating-stars{
+                        margin-top: 5px;
                     }
                     .prices{
                         font-weight: 800;

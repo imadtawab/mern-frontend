@@ -3,7 +3,7 @@
     h5{
         font-size: 11px;
         // color: #454749; // ...
-        color: #ededed;
+        // color: var(--grey);
         text-transform: uppercase;
     }
     ul{
@@ -14,17 +14,17 @@
                 padding: 10px 0;
                 align-items: center;
                 // color: #333; // ...
-                color: #ededed;
+                color: inherit;
                 font-size: 15px;
                 padding-left: 20px;
                 transition: background .3s;
                 border-radius: 6px;
-                --nav-bg:#787878;
+                --nav-bg:var(--dark-grey);
                 position: relative;
                 &:hover,&.active{
                         // background: #d3d3d3; // ...
-                        background: #ededed;
-                        color: #202939;
+                        background: var(--grey);
+                        color: var(--sidebar-color);
                 }
                 &::after,&::before{
                     position: absolute;
@@ -36,7 +36,7 @@
                 }
                 &::after{
                     content: var(--content);
-                    color: #fff;
+                    color: var(--white-color);
                     background: var(--nav-bg);
                     font-size: 14px;
                     padding: 8px 15px;

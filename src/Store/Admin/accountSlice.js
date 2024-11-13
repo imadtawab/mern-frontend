@@ -73,6 +73,20 @@ export const changePassword = createAsyncThunk("changePassword" ,
       .catch(err => rejectWithValue(err.response.data || err))
 })
 
+const changeStoreNameReducer = ( state = initState , action ) => {
+	// Logic
+    if( action.type === "account/changeStoreName" ) {
+        return {
+          ...state,
+          user: {
+            ...state?.user,
+            storeOwner: action.payload
+          }
+        }
+    }
+    return state
+}
+
 const initState = {
     user: null, 
     isLoading: false,
@@ -81,7 +95,9 @@ const initState = {
 const accountSlice = createSlice({
     name: "account",
     initialState: initState,
-    reducers: {},
+    reducers: {
+      changeStoreName: changeStoreNameReducer
+    },
     extraReducers: (builder) => {
       builder
       // Register Account
@@ -120,6 +136,7 @@ const accountSlice = createSlice({
       })
       .addCase(loginAccount.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log(action.payload)
         state.user = {
           ...action.payload.user,
           avatar: avatarHandle(action.payload.user.avatar)
@@ -195,5 +212,5 @@ const accountSlice = createSlice({
     },
 })
 
-// export const counterActions = accountSlice.actions
+export const counterActions = accountSlice.actions
 export default accountSlice.reducer

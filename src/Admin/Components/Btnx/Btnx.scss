@@ -13,7 +13,7 @@
         // --cl : #1c99a3;
     }
     &.dark{
-        --cl: var(--dark-color)
+        --cl: var(--text-color)
     }
     #selectManyBtn{
         opacity: 0 !important;
@@ -86,9 +86,12 @@
                 opacity: .95;
             }
         }
-        &:focus {
+        &:focus-visible {
             box-shadow: 0 0 0px 2px #fff, 0 0 0 5px var(--cl);
             opacity: .8;
+        }
+        &:active {
+            transform: scale(.9);
         }
 
         // &:focus{

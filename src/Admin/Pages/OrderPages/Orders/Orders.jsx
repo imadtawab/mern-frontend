@@ -39,12 +39,13 @@ export default function Orders() {
             setOrders(data)
             setPagination(pagination)
             setActiveFilter(false)
-            let {search_product, search_customer, status, from, to} = query
+            let {search_product,search_ref, search_customer, status, from, to} = query
             if(search_product) setSearchProduct(search_product)
+              if(search_ref) setSearchRef(search_ref)
               if(search_customer) setSearchCustomer(search_customer)
             if(status) setStatusFilter(status)
             if(from || to) setDateFilter({from, to})
-              if(search_product || search_customer || status || from || to) {
+              if(search_product || search_ref || search_customer || status || from || to) {
                 setNumberOfFilters(pagination.length)
               }else{
                 setNumberOfFilters(null)
@@ -168,6 +169,7 @@ export default function Orders() {
     })
     const [statusFilter , setStatusFilter] = useState(null)
     const [searchProduct , setSearchProduct] = useState(null)
+    const [searchRef , setSearchRef] = useState(null)
     const [searchCustomer , setSearchCustomer] = useState(null)
 
     const filterHandler = (e) => {
@@ -175,6 +177,7 @@ export default function Orders() {
       let filterObject = {}
         filterObject.search_customer = searchCustomer
         filterObject.search_product = searchProduct
+        filterObject.search_ref = searchRef
         filterObject.status = statusFilter
         filterObject.from = dateFilter.from
         filterObject.to = dateFilter.to   
@@ -186,7 +189,15 @@ export default function Orders() {
     setStatusFilter(null)
     setSearchCustomer(null)
     setSearchProduct(null)
-    filterQuerysHandler({}, dispatchFunc, pagination.step, true)
+    setSearchRef(null)
+    let filterObject = {}
+    filterObject.search_customer = null
+    filterObject.search_product = null
+    filterObject.search_ref = null
+    filterObject.status = null
+    filterObject.from = null
+    filterObject.to = null
+    filterQuerysHandler(filterObject, dispatchFunc, pagination.step, true)
   }
   return (
     <PageStructure title="Orders" >
@@ -208,6 +219,10 @@ export default function Orders() {
             <form onSubmit={filterHandler} method='GET' className="Filter">
             <FlexSections direction="column">
               <FlexSections wrap={true}>
+                <InputBox value={searchRef} onChange={(e) => {
+        setSearchRef(e.target.value)
+        }} placeholder="Search ..." label="Search Reference" pd="none" flex="1" type="search" 
+  />
               <InputBox value={searchProduct} onChange={(e) => {
                       setSearchProduct(e.target.value)
                       }} placeholder="Search ..." label="Search Product" pd="none" flex="1" type="search" 
@@ -216,15 +231,15 @@ export default function Orders() {
                       setSearchCustomer(e.target.value)
                       }} placeholder="Search ..." label="Search Customer" pd="none" flex="1" type="search" 
                 />
+              </FlexSections>
+              <FlexSections wrap={true}>
+                {/* <FlexSections flex="2" wrap={true}> */}
               <SelectBox flex="1" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} pd="none" name="status" id="stautsSelect" label="Status">
                       <option value="">all</option>
                       {statusArray.map(status => (
                       <option value={status}>{status}</option>
                       ))}
               </SelectBox>
-              </FlexSections>
-              <FlexSections wrap={true}>
-                {/* <FlexSections flex="2" wrap={true}> */}
                   <InputBox flex="1" value={dateFilter.from} onChange={(e) => setDateFilter(prev => {return {...prev , from: e.target.value}})} pd="none" label="from" type="date" name="from"/>
                   <InputBox flex="1" value={dateFilter.to} onChange={(e) => setDateFilter(prev => {return {...prev , to: e.target.value}})} pd="none" label="to" type="date" name="to"/>
                 {/* </FlexSections> */} 
@@ -247,6 +262,7 @@ export default function Orders() {
                     <td>
                         <CheckBox onChange={(e) => selectAllItemsHandler(e, setItemsSelected, orders)}  name={"selectAll"} id="selectAll"/>
                     </td>
+                    <td>ref</td>
                     <td>order</td>
                     <td>customer</td>
                     <td>quantity</td>
@@ -268,6 +284,9 @@ export default function Orders() {
                             id={`${order._id}`}
                         />
                     </td>
+                    <td>
+                      <NavLink to={'/admin/orders/'+order._id} style={{color: "cornflowerblue"}}>{order?.ref}</NavLink>
+                      </td>
                     <td>
                         <div className="product-name">
                             <div style={{    display: "grid",

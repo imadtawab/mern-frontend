@@ -6,7 +6,7 @@ export const getProducts = createAsyncThunk("getProducts",
     const {rejectWithValue} = thunkAPI
     return clientAPI.get("/products").then(docs => docs.data).catch(err => {
       console.log(err)
-      rejectWithValue(err.response.data || err)
+      rejectWithValue(err?.response?.data || err)
     })
 })
 export const getProductsFilter = createAsyncThunk("getProductsFilter",
@@ -27,6 +27,13 @@ export const getProductDetails = createAsyncThunk("getProductDetails",
     return clientAPI.get("/products/"+slug).then(docs => docs.data).catch(err => rejectWithValue(err.response.data || err))
   }
 )
+export const addCustomerReview = createAsyncThunk("addCustomerReview",
+  async ({_id, body}, thunkAPI) => {
+    const {rejectWithValue} = thunkAPI
+    return clientAPI.post("/products/reviews/"+_id, body).then(docs => docs.data).catch(err => rejectWithValue(err.response.data || err))
+  }
+)
+
 
 const initState = {
     isLoading: false,
@@ -70,16 +77,26 @@ const client_productSlice = createSlice({
       .addCase(getProductDetails.rejected, (state, action) => {
         state.isLoadingProduct = false;
       })
-            // getProductsFilter
-            .addCase(getProductsFilter.pending, (state) => {
-              state.isLoadingFilter = true;
-            })
-            .addCase(getProductsFilter.fulfilled, (state, action) => {
-              state.isLoadingFilter = false;
-            })
-            .addCase(getProductsFilter.rejected, (state, action) => {
-              state.isLoadingFilter = false;
-            })
+      // getProductsFilter
+      .addCase(getProductsFilter.pending, (state) => {
+        state.isLoadingFilter = true;
+      })
+      .addCase(getProductsFilter.fulfilled, (state, action) => {
+        state.isLoadingFilter = false;
+      })
+      .addCase(getProductsFilter.rejected, (state, action) => {
+        state.isLoadingFilter = false;
+      })
+      // addCustomerReview
+      .addCase(addCustomerReview.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addCustomerReview.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(addCustomerReview.rejected, (state, action) => {
+        state.isLoading = false;
+      })
     },
 })
 export default client_productSlice.reducer

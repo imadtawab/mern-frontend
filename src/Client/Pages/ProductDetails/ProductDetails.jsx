@@ -11,6 +11,8 @@ import PageNotFound from "../../../Admin/Components/PageNotFound/PageNotFound";
 import { addToCart, addToWishList, deleteFromWishList } from "../../../Store/Client/shoppingCartSlice";
 import { activeSideCart } from "../../Utils/sideCartUtils";
 import Catalogue from "../../Components/Catalogue/Catalogue";
+import CustomerReviews from "../../Components/CustomerReviews/CustomerReviews";
+import { ratingStarsHandler } from "../../Utils/productUtils";
 
 export default function ProductDetails() {
     const dispatch = useDispatch()
@@ -58,9 +60,9 @@ export default function ProductDetails() {
       } else {
         variant = {
           image: product.media.images[0],
-          originalPrice: product.prices.originalPrice,
-          salePrice: product.prices.salePrice,
-          quantity: product.quantity,
+          originalPrice: +product.prices.originalPrice,
+          salePrice: +product.prices.salePrice,
+          quantity: +product.quantity,
           _id: product._id,
           quantityUser: quantite
         }
@@ -113,6 +115,9 @@ export default function ProductDetails() {
       dispatch(deleteFromWishList(product._id)).unwrap()
       .then(docs => setIsInWishList(false))
     }
+
+    const rating = product?.reviewsOwner.map(r => r.rating).reduce((a,b) => a+b, 0) / product?.reviewsOwner.length
+
     if(!product && !isLoadingProduct) return <PageNotFound to="/products"/>
   return (
     <div className="ProductDetails">
@@ -154,6 +159,10 @@ export default function ProductDetails() {
         <div className="salePrice">
           {prices?.salePrice} <span>mad</span>
         </div>
+        {product?.reviewsOwner.length ? (<div className="rating-stars">
+          {ratingStarsHandler(rating)}
+          <a href="#reviews" className="rating-length">({product?.reviewsOwner.length} avis client)</a>
+        </div>) : null}
       </div>
       <div className="variants">
         {product?.options.map(att => (
@@ -208,9 +217,9 @@ export default function ProductDetails() {
         <h5>Description :</h5>
         <div dangerouslySetInnerHTML={{ __html: product?.description }}/>
       </div>
-      <div className="product-details-section reviews-section">
+      <div id='reviews' className="product-details-section">
         <h5>Customer Reviews :</h5>
-        <div className="review-title">{2} avis pour {product?.name}</div>
+        <CustomerReviews _id={product?._id} productName={product?.name} reviews={product?.reviewsOwner}/>
       </div>
       </Loading>
   </div>

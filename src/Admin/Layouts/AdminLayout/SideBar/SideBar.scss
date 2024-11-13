@@ -1,7 +1,7 @@
 .SideBar {
     // background: #f5f5f5;
     // background: #fff; // ...
-    background: #202939;
+    background: var(--sidebar-color);
     max-width: 100%;
     width: 250px;
     // overflow: hidden;
@@ -9,6 +9,7 @@
     position: fixed;
     // border-right: 2px solid #eee;
     z-index: 20;
+    color: var(--grey);
     @media (min-width: 650px) {
         &.closed{
             position: absolute;
@@ -119,7 +120,7 @@
             font-weight: bold;
             font-size: 16px;
             text-transform: uppercase;
-            color: #ededed;
+            color: inherit;
         }
     }
     .navbar-parent{
@@ -150,7 +151,7 @@
     
     /* Handle on hover */
     &::-webkit-scrollbar-thumb:hover {
-        background: #337b58;
+        background: var(--main-color);
     }
     .navBar {
         padding: var(--pd);

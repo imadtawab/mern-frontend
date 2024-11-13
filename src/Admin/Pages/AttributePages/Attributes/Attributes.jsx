@@ -162,7 +162,13 @@ export default function Attributes() {
     setTypeFilter(null)
     setPublishFilter (null)
     setSearchFilter(null)
-    filterQuerysHandler({}, dispatchFunc, pagination.step, true)
+    let filterObject = {}
+    filterObject.search = null
+    filterObject.type = null
+    filterObject.publish = null
+    filterObject.from = null
+    filterObject.to = null  
+    filterQuerysHandler(null, dispatchFunc, pagination.step, true)
   }
   return (
     <PageStructure title={"Attributes"} 

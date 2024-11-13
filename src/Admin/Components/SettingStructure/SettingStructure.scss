@@ -6,13 +6,13 @@
         ul{
             display: flex;
             justify-content: start;
-            border-bottom: 1px solid #ddd;
+            border-bottom: var(--border);
             overflow: auto;
             &::-webkit-scrollbar{
                 height: 0;
             }
             li{
-                color: #6b7280;
+                color: var(--text-color);
                 transition: all .3s;
                 border-bottom: 2px solid transparent;
                 a{

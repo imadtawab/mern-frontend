@@ -6,12 +6,12 @@
     // margin-bottom: var(--pd);
     padding: var(--pd);
     margin-bottom: var(--pd);
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
+    background-color: var(--white-color);
+    border: var(--border);
     border-radius: 8px;
     // box-shadow: 0 5px 20px #0000000d;
     &.grey{
-        background: #fafbfb;
+        background: var(--light-grey);
     }
     &.pd-none{
         padding : 0 !important;
@@ -25,7 +25,7 @@
     > h3{
         text-transform: capitalize;
         font-size: 18px;
-        color: var(--dark-color);
+        color: var(--text-color);
         margin-bottom: 20px;
     }
     .Controlls-sett{

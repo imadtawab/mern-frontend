@@ -6,12 +6,12 @@
         ul {
             padding: 10px 0;
             overflow: hidden;
-            border-right: 1px solid #eee;
+            border-right: var(--border);
             height: 100%;
             li {
                 a {
                     padding: 15px 20px;
-                    color: #595959;
+                    color: var(--text-color);
                     font-weight: 500;
                     font-size: 16px;
                     display: flex;

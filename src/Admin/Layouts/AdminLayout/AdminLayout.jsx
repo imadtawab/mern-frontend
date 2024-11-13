@@ -11,9 +11,12 @@ import { toast } from 'react-toastify'
 import {useNavigate, Navigate} from 'react-router-dom'
 import { clearCookies } from '../../Utils/cookieUtils'
 import Loading from '../../../MainComponent/Loading/Loading'
+import { changeThemeMode } from '../../Utils/storeSettingsUtils'
+
 
 export default function AdminLayout() {
   const {isLoadingPage, user} = useSelector(s => s.account)
+  const {darkMode} = useSelector(s => s.store_settings)
   const [sideBarShow , setSideBarShow ] = useState(sessionStorage.getItem("showSideBar") ? sessionStorage.getItem("showSideBar") === "true" ? true : false : true)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -36,7 +39,15 @@ export default function AdminLayout() {
         logoutHandle()
       })
     }
+    changeThemeMode(localStorage.getItem("THEME_MODE") === "darkmode")
   },[])
+  useEffect(() => {
+    if(darkMode) {
+      document.body.classList.add('darkmode');
+    } else {
+      document.body.classList.remove('darkmode');
+    }
+}, [darkMode])
 
   return (
     <Loading loading={isLoadingPage}>

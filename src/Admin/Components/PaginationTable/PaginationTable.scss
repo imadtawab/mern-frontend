@@ -6,15 +6,16 @@
     padding: 20px;
     position: sticky;
     left: 0;
-    border-top: 1px solid #e5e5e5;
+    border-top: var(--border);
     .result{
-        color: #8f8f8f;
+        color: var(--dark-grey);
         display: flex;
         align-items: center;
         gap: 10px;
         select{
-            border: 2px solid #29a5a7;
-            color: #3b3b3b;
+            border: 2px solid var(--main-color);
+            background: var(--light-grey);
+            color: var(--text-color);
             padding: 5px;
             font-weight: bold;
             border-radius: 7px;
@@ -26,9 +27,9 @@
         justify-content: end;
         gap: 10px;
         align-items: center;
-        background: #fff;
+        background: var(--white-color);
         .pager{
-            color: #878787;
+            color: var(--dark-grey);
             width: 35px;
             display: grid;
             place-content: center;
@@ -38,15 +39,15 @@
             font-size: 16px;
             cursor: pointer;
             &.active{
-                background: #29a5a7;
-                color: #fff;
+                background: var(--main-color);
+                color: #fff;// var(--white-color);
             }
             &:not(.active):hover{
-                background: #eee;
+                background: var(--grey);
             }
             &.previous,&.next{
                 font-size: 25px;
-                background: #eee;
+                background: var(--grey);
             }
             &.disabled{
                 opacity: .5;

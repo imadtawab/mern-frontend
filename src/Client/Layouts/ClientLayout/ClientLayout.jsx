@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa'
 import './ClientLayout.scss'
 import { Outlet } from 'react-router'
 import {NavLink} from 'react-router-dom'
@@ -11,11 +11,14 @@ import { clientAPI } from '../../../API/axios-global'
 import SideCart, { SideCart1 } from '../../Components/SideCart/SideCart'
 import { activeSideCart } from '../../Utils/sideCartUtils'
 import { getShoppingCart } from '../../../Store/Client/shoppingCartSlice'
+import { getStoreSettings } from '../../../Store/Client/storeSettingsSlice'
 
 
 export default function ClientLayout() {
   const [showMenuBar, setShowMenuBar] = useState(false)
   const {length: shoppingCartNumber, wishListNumber} = useSelector(s => s.shoppingCart)
+  const {social_media} = useSelector(s => s.client_settings)
+  console.log(social_media)
   const dispatch = useDispatch()
   const [cookies , setCookies] = useCookies()
 
@@ -32,6 +35,10 @@ export default function ClientLayout() {
       expirationDate.setTime(expirationDate.getTime() + 12 * 60 * 60 * 1000); // Set expiration date to 12 hours from now
       docs.data.cookie && setCookies('xidvstrs', docs.data.cookie, { path: '/', expires: expirationDate });
   }).catch(err => console.log(err))
+  // get store settings
+  dispatch(getStoreSettings()).unwrap()
+  .then(docs => console.log(docs))
+  .then(err => console.log(err.message))
   }, [])
 
   const menuIcons = (
@@ -165,10 +172,10 @@ export default function ClientLayout() {
                 © 2023 Evershop ___ @Imad Tawab
               </p>
               <div className="social-media-links">
-                <a href="#"> <FaFacebook/> </a>
-                <a href="#"> <FaTwitter/> </a>
-                <a href="#"> <FaInstagram/> </a>
-                <a href="#"> <FaLinkedin/> </a>
+                {social_media?.facebook_url && <a rel="noreferrer" target='_blank' href={social_media.facebook_url}> <FaFacebook/> </a>}
+                {social_media?.instagram_url && <a rel="noreferrer" target='_blank' href={social_media.instagram_url}> <FaInstagram/> </a>}
+                {social_media?.tiktok_url && <a rel="noreferrer" target='_blank' href={social_media.tiktok_url}> <FaTiktok/> </a>}
+                {social_media?.twitter_url && <a rel="noreferrer" target='_blank' href={social_media.twitter_url}> <FaTwitter/> </a>}
               </div>
             </div>
         </div>

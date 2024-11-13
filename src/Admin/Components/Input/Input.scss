@@ -5,13 +5,13 @@
     &.error{
         --main: var(--danger-color);
         input{
-            background-color: #fff;
+            background-color: var(--white-color);
         }
     }
     label{
         color: var(--main);
         font-weight: 600;
-        background: #fff;
+        background: var(--white-color);
         position: absolute;
         left: 15px;
         top: 0;
@@ -26,6 +26,7 @@
         padding: 11px;
         width: 100%;
         font-size: 16px;
+        color: var(--text-color);
     }
     .required{
         color: var(--danger-color)

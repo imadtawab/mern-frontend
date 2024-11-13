@@ -352,19 +352,21 @@ const { isLoadingSlug, isLoadingPage } = useSelector(s => s.product)
                       required
                       label="Description"
                       personelInput={
-                        <JoditEditor
-                          required={true}
-                          ref={editor}
-                          value={description}
-                          config={{
-                            readonly: false,
-                            placeholder: "Start typings...",
-                            minHeight: 400,
-                            maxHeight: 500
-                          }}
-                          tabIndex={1} // tabIndex of textarea
-                          onBlur={(newDescription) => setDescription(newDescription)} // preferred to use only this option to update the description for performance reasons
-                        />
+                        <span style={{color: "#000"}}>
+                          <JoditEditor
+                            required={true}
+                            ref={editor}
+                            value={description}
+                            config={{
+                              readonly: false,
+                              placeholder: "Start typings...",
+                              minHeight: 400,
+                              maxHeight: 500
+                            }}
+                            tabIndex={1} // tabIndex of textarea
+                            onBlur={(newDescription) => setDescription(newDescription)} // preferred to use only this option to update the description for performance reasons
+                          />
+                        </span>
                       }
                     />
                   </div>

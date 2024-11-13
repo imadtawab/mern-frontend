@@ -8,7 +8,7 @@
     }
     .image-and-icon{
         .image_show{
-border: 2px dashed #555;
+border: var(--border);
     height: 125px;
     margin-bottom: 20px;
     min-width: 200px;

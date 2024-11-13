@@ -62,7 +62,7 @@ export default function Regsiter() {
 }
 
 export function ActivationAccount({email}) {
-  const defaultCounter = 5
+  const defaultCounter = 60
   const {isLoading} = useSelector(s => s.account)
   const [resendActive , setResendActive] = useState(false)
   const [counter, setCounter] = useState(defaultCounter);

@@ -117,7 +117,7 @@ export default function Catalogue({items, current}) {
             <div data-scrollx="0" id="coursel" onMouseLeave={blurHandle} onMouseMove={mouseMoveHandle} onTouchMove={touchMoveHandle} onMouseDown={mouseDownHandle} onTouchStart={touchStartHandle} onMouseUp={mouseUpHandle} onTouchEnd={touchEndHandle} 
             style={{left: `-${activePanel * 100}%`}} className="coursel-slider">
               {panels.map((val) => (
-              <span draggable="false">
+              <span key={"panels" + val} draggable="false">
                 <img draggable="false" loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${val}`} alt="" />
               </span>
             ))}
@@ -133,7 +133,7 @@ export default function Catalogue({items, current}) {
         {panels.length > 1 && (
         <div className="coursel-indicators">
         {panels.map((_, idx) => (
-            <span onClick={() => indicatorsHandler(idx)} key={`indicator-${idx}`} className={idx === activePanel ? "active" : ""}></span>
+            <span key={"panels_1" + idx} onClick={() => indicatorsHandler(idx)} key={`indicator-${idx}`} className={idx === activePanel ? "active" : ""}></span>
           ))}
         </div>      
         )}

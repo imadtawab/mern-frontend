@@ -13,6 +13,8 @@ import { addToCart, addToWishList, deleteFromWishList } from '../../../Store/Cli
 import { activeSideCart } from '../../Utils/sideCartUtils'
 import FilterProductsSection from '../FilterProductsSection/FilterProductsSection'
 import Loading from '../../../MainComponent/Loading/Loading'
+import { ratingStarsHandler } from '../../Utils/productUtils'
+import RatingStars from '../RatingStars/RatingStars'
 
 export default function ProductsSection({filter, wishList, title, subTitle, products, setProducts, emptyMessage}) {
     const dispatch = useDispatch()
@@ -46,9 +48,9 @@ export default function ProductsSection({filter, wishList, title, subTitle, prod
     } else {
       variant = {
         image: prod.media.images[0],
-        originalPrice: prod.prices.originalPrice,
-        salePrice: prod.prices.salePrice,
-        quantity: prod.quantity,
+        originalPrice: +prod.prices.originalPrice,
+        salePrice: +prod.prices.salePrice,
+        quantity: +prod.quantity,
         _id: prod._id,
         quantityUser: 1
       }
@@ -199,6 +201,10 @@ export default function ProductsSection({filter, wishList, title, subTitle, prod
                           </div>
                           <p>{prod.categoryOwner.name}</p>
                           <h2>{prod.name}</h2>
+                          {prod?.reviewsOwner.length ? (<div className="rating-stars">
+          {ratingStarsHandler(prod?.reviewsOwner.map(r => r.rating).reduce((a,b) => a+b, 0) / prod?.reviewsOwner.length)}
+        </div>) : null}
+        
                           <div className="prices">
                           {prod.prices.originalPrice ? <div className="originalPrice">{prod.prices.originalPrice}<span>mad</span></div> : null}
                             <div className="salePrice">{prod.prices.salePrice}<span>mad</span></div>

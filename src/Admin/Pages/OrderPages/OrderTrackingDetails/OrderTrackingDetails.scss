@@ -1,6 +1,6 @@
 .OrderTrackingDetails{
-        padding-bottom: 10px;
-        background-color: #fcfcfc;
+        // padding-bottom: 10px;
+        // background-color: #fcfcfc;
         &.full-screen {
             overflow: auto;
             padding-bottom: 80px !important;
@@ -14,9 +14,9 @@
         }
     }
     .tracking-controllers{
-        border-top: 1px solid #e5e5e5;
+        border-top: var(--border);
         box-shadow: 0 -5px 20px #0000000d;
-        background: #fff;
+        background: var(--white-color);
         display: flex;
         align-items: center;
         justify-content: space-between;

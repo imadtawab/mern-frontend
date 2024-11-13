@@ -1,0 +1,122 @@
+.CustomerReviews {
+    display: flex;
+    gap: 20px 40px;
+    @media (max-width: 750px) {
+        flex-direction: column;
+    }
+  section {
+    flex: 1;
+    h6 {
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    &.reviews {
+        .empty-reviews {
+            padding: 20px 0;
+            color: #8d8d8d;
+            font-size: 15px;
+        }
+      .review-box {
+        display: flex;
+        justify-content: space-between;
+        padding: 25px 0;
+        gap: 20px;
+        .rating-stars {
+          align-items: initial;
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid #eee;
+        }
+        .customer {
+          display: flex;
+          gap: 20px;
+          .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: grid;
+            place-content: center;
+            flex: none;
+            img {
+            }
+          }
+          .info {
+            .name {
+              font-weight: bold;
+              margin-bottom: 15px;
+              text-transform: capitalize;
+              span {
+                font-weight: initial;
+                font-style: italic;
+                color: #555;
+              }
+            }
+            p {
+              color: #555;
+            }
+          }
+        }
+      }
+    }
+    &.add-review {
+      form {
+        .rating-stars {
+          flex-direction: row-reverse;
+          span {
+            position: relative;
+            display: grid;
+            svg {
+              cursor: pointer;
+              position: relative;
+              &:nth-child(1) {
+                position: absolute;
+                display: none;
+              }
+            }
+            &:hover,
+            &.active {
+              &,
+              ~ span {
+                svg:nth-child(1) {
+                  z-index: 1;
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+        .rating-error {
+          font-size: 13px;
+          color: #EF5350;
+          font-weight: 600;
+        }
+        button {
+          color: #fff;
+          border-radius: 5px;
+          background: var(--main-color);
+          text-align: center;
+          font-weight: 550;
+          padding: 13px;
+          text-transform: uppercase;
+          font-size: 15px;
+          cursor: pointer;
+          transition: background 0.3s;
+          margin-top: 20px;
+          border: none;
+          outline: none;
+          &:hover {
+            background: #02675e;
+          }
+          &:disabled {
+            opacity: .8;
+            cursor: no-drop;
+            text-transform: lowercase;
+          }
+        }
+      }
+    }
+  }
+}

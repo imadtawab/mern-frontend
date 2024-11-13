@@ -2,7 +2,7 @@
     min-height: calc(100vh - 72px);
     // background: #f5f5f5;
     // background: #f5f5f578;
-    background: #fcfcfc;
+    background: var(--light-grey);
     padding: var(--pd) calc(var(--pd)*2);
     .head{
         display: flex;
@@ -14,7 +14,7 @@
         h1{
             text-transform: capitalize;
             font-size: 22px;
-            color: #222;
+            color: var(--text-color);
         }
     }
 }

@@ -5,11 +5,16 @@ import { FaArrowRightToBracket, FaUserLarge } from 'react-icons/fa6'
 import { NavLink } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { MdLightMode, MdDarkMode } from "react-icons/md";
+import { changeThemeMode } from "../../../Utils/storeSettingsUtils";
+
 
 export default function Header({setSideBarShow,sideBarShow, logoutHandle}) {
   
   const {user} = useSelector(s => s.account)
+  const {darkMode} = useSelector(s => s.store_settings)
   const [profileMenu, setProfileMenu] = useState(false)
+  
   const dropdownRef = useRef(null);
           // Event listener for click outside the dropdown
           const handleOutsideClick = (event) => {
@@ -27,6 +32,8 @@ export default function Header({setSideBarShow,sideBarShow, logoutHandle}) {
           };
         }, []); // Empty dependency array ensures the effect runs only once
 
+
+        
   return (
     <header className="Header">
         <div onClick={()=>{
@@ -36,6 +43,9 @@ export default function Header({setSideBarShow,sideBarShow, logoutHandle}) {
           <BiMenu/>
         </div>
         <div className="bar">
+          <div className="mode">
+            {darkMode ? <MdLightMode onClick={() => changeThemeMode(false)}/> : <MdDarkMode onClick={() => changeThemeMode(true)}/>}
+          </div>
           <div className="notification">
             <BiBell/>
           </div>
@@ -44,7 +54,8 @@ export default function Header({setSideBarShow,sideBarShow, logoutHandle}) {
             </div>
             <div className="info">
               <h6>{user?.userName || "admin"}</h6>
-              {user?.storeName && <NavLink target="_blanc" className="storeName" to={`${window.location.protocol}//${user?.storeName}.${window.location.host}`}><IoStorefront />{user?.storeName}</NavLink>}
+              {console.log(user)}
+              {user?.storeOwner?.name && <NavLink target="_blanc" className="storeName" to={`${window.location.protocol}//${user?.storeOwner?.name}.${window.location.host}`}><IoStorefront />{user?.storeOwner?.name}</NavLink>}
             </div>
             <ul className={`menu ${profileMenu ? " active" : ""}`}>
               <li>  

@@ -14,8 +14,9 @@ export default function ModalValidation() {
   const {isLoading: shippingLoading} = useSelector(s => s.shipping)
   const {isLoading: couponLoading} = useSelector(s => s.coupon)
   const {isLoading: accountLoading} = useSelector(s => s.account)
+  const {isLoading: storeLoading} = useSelector(s => s.store_settings)
   
-  let isLoading = attLoading || catgLoading || prodLoading || orderLoading || shippingLoading || couponLoading || accountLoading
+  let isLoading = attLoading || catgLoading || prodLoading || orderLoading || shippingLoading || couponLoading || accountLoading || storeLoading
   
   if(!active) return
   return (

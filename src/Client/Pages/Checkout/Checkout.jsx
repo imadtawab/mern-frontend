@@ -8,6 +8,7 @@ import { countProductQuantity, countProductTotalPrice } from "../../Utils/sideCa
 import { placeOrder } from "../../../Store/Client/shoppingCartSlice";
 import { toast } from 'react-toastify'
 import { NavLink } from "react-router-dom";
+import SuccessOrder from "../../Components/SuccessOrder/SuccessOrder";
 export default function Checkout({coupon,shoppingCart,numberOfItems,shipping,setCheckout,totalPrice, subTotal, shippingMethod}) {
   const {isLoading} = useSelector(s => s.shoppingCart)
   const dispatch = useDispatch()
@@ -44,6 +45,7 @@ export default function Checkout({coupon,shoppingCart,numberOfItems,shipping,set
         })
       }
     })
+    console.log(shippingMethod)
     let shippingMethodHandler = {
       _id: shippingMethod._id,
       name: shippingMethod.name,
@@ -54,18 +56,19 @@ export default function Checkout({coupon,shoppingCart,numberOfItems,shipping,set
     // console.log(customer, shoppingProducts);
     dispatch(placeOrder({customer,shoppingCart: shoppingProducts, shippingMethod: shippingMethodHandler, coupon})).unwrap()
     .then(docs => {
-      setSuccessOrder(true)
+      setSuccessOrder(docs.data)
     })
     .catch(err => toast.error(err.message))
   }
 
   if(successOrder) return (
-    <div className="success-order">
-        <div className="title">Successfully Order</div>
-        <div className="icon"><BsCheck/></div>
-        <div className="message">Your request has been successfully.</div>
-        <NavLink to="/">Continue Shopping</NavLink>
-    </div>
+    // <div className="success-order">
+    //     <div className="title">Successfully Order</div>
+    //     <div className="icon"><BsCheck/></div>
+    //     <div className="message">Your request has been successfully.</div>
+    //     <NavLink to="/">Continue Shopping</NavLink>
+    // </div>
+    <SuccessOrder order={successOrder}/>
   )
   return (
     <>
@@ -198,16 +201,16 @@ export default function Checkout({coupon,shoppingCart,numberOfItems,shipping,set
             {coupon?.discount && (
             <div className="box-head">
                 <div className="title">Discount</div>
-                <div className="total">-{coupon.discount}{coupon.type === "fixed" ? <span>MAD</span> : <span>%</span>}</div>
+                <div className="total">-{coupon.discount.toFixed(2)}{coupon.type === "fixed" ? <span>MAD</span> : <span>%</span>}</div>
             </div>
             )}
             <div className="box-head">
               <div className="title">Shipping</div>
-              <div className="total">{shipping ? <>{shipping}<span>mad</span></> : "Free"}</div>
+              <div className="total">{shipping ? <>{shipping.toFixed(2)}<span>mad</span></> : "Free"}</div>
             </div>
             <div className="box-head">
               <div className="title">Total</div>
-              <div className="total">{totalPrice}<span>mad</span></div>
+              <div className="total">{totalPrice.toFixed(2)}<span>mad</span></div>
             </div>
           </div>
 

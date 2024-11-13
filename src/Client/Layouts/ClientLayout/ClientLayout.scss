@@ -1,5 +1,29 @@
 .ClientLayout{
     overflow-x: hidden;
+    .rating-stars {
+        font-size: 16px;
+        color: #eabe12;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            height: fit-content;
+            display: grid;
+        }
+        .rating-length {
+            color: #999;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: color 0.3s;
+            font-weight: 500;
+            &:hover {
+                color: #777;
+            }
+        }
+        .empty {
+          color: #bbb;
+        }
+      }
     .logo{
         display: flex;
         align-items: center;

@@ -120,7 +120,7 @@ export function OrderDetailsHandle({order, setOrder , key}) {
     return (
         <>
         
-    <PageStructure loading={isLoadingPage} key={key} title={<>Order Details <span style={{fontWeight: "normal",fontSize: "14px"}}>({moment(order?.createdAt).format("YYYY-MM-DD HH:mm")})</span></>} personelButton={<Btnx style={{display: "inline-block"}} onClick={() => {
+    <PageStructure loading={isLoadingPage} key={key} title={<>Order Details : {order?.ref} <span style={{marginTop: "10px",fontWeight: "normal",fontSize: "14px", display: "block"}}>Created at : {moment(order?.createdAt).format("YYYY-MM-DD  HH:mm")}</span></>} personelButton={<Btnx style={{display: "inline-block"}} onClick={() => {
         if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
             // setFullScreenForAfterPrint(true)
             // console.log(true , "on click in print btn");

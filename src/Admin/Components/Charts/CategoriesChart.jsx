@@ -1,3 +1,4 @@
+import { color } from 'echarts';
 import ReactECharts from 'echarts-for-react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
@@ -11,7 +12,7 @@ export default function CategoriesChart({data=[]}) {
           },
           legend: {
             top: '0%',
-            left: 'center'
+            left: 'center',
           },
           series: [
             {
@@ -59,3 +60,4 @@ export default function CategoriesChart({data=[]}) {
     <ReactECharts ref={chartRef} option={options}/>
   )
 }
+

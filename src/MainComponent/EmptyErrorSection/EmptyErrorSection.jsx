@@ -6,7 +6,7 @@ export default function EmptyErrorSection() {
         placeContent: "center",
         height: "330px",
         overflow: "hidden",
-        background: "#fff"}} className="EmptyErrorSection">
+        background: "var(--white-color)"}} className="EmptyErrorSection">
       <img loading='lazy' style={{width: "400px", maxWidth: "100%",
     height: "auto"}} src={emptySvg} alt="" />
     </div>

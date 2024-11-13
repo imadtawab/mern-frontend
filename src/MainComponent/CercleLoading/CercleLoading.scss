@@ -21,6 +21,10 @@
             border-width: 2px;
         }
     }
+    &.absolute {
+        position: absolute;
+        width: 100%;
+    }
     .cercle{
         border: 4px solid #4f4f4f;
         border-radius: 50%;

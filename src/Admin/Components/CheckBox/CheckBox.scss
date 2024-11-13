@@ -1,7 +1,7 @@
 .CheckBox{
     
     display: flex;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
 
     input{
@@ -10,18 +10,18 @@
             width: 20px;
             height: 20px;
             display: block;
-            border: 1px solid #aaa;
+            border: var(--border);
             border-radius: 4px;
             cursor: pointer;
             color: transparent;
             transition: all .3s;
             transform: rotate(-90deg);
-            background-color: #fff;
+            background-color: var(--white-color);
         }
         &:checked{
             & + label{
             background-color: #2196f3;
-            color: #fff;
+            color: var(--white-color);
             font-weight: bold;
             border-color: #2196f3;
             font-size: 16px;
@@ -31,7 +31,6 @@
         }
     }
     .label{
-        color: initial;
         cursor: pointer;
         display: block;
         width: 100%;

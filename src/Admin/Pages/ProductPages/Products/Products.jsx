@@ -173,7 +173,14 @@ export default function Products() {
     setPublishFilter (null)
     setCategoryFilter(null)
     setSearchFilter(null)
-    filterQuerysHandler({}, dispatchFunc, pagination.step, true)
+    let filterObject = {}
+    filterObject.search = null
+    filterObject.status = null
+    filterObject.publish = null
+    filterObject.category = null
+    filterObject.from = null
+    filterObject.to = null  
+    filterQuerysHandler(filterObject, dispatchFunc, pagination.step, true)
   }
   return (
   <PageStructure

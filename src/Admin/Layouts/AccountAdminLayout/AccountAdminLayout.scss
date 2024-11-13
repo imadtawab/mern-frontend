@@ -1,16 +1,31 @@
 .AccountAdminLayout{
     display: flex;
     height: 100vh;
-    background: var(--bg);
+    background: var(--lightest-grey);
+    @media (max-width:700px) {
+        flex-direction: column;
+        background: var(--white-color);
+    }
     > article {
         flex: 1;
+        @media (max-width:700px) {
+            flex: none;
+        }
     }
     .left-account {
         display: grid;
         place-content: center;
+        @media (max-width:700px) {
+    justify-content: flex-start;
+    padding: 20px;
+    border-bottom: var(--border);
+        }
     }
     .right-account {
-        background: #fff;
+        background: var(--white-color);
         overflow-x: hidden;
+        @media (max-width:700px) {
+            overflow: initial;
+        }
     }
 }

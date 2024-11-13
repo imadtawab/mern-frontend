@@ -116,7 +116,7 @@ export default function Invoice({print,setPrintActive , order}) {
                          <table className="right-section">
                          <tr>
                             <th>Order Id<span>:</span></th>
-                            <td>#{order?._id.slice(0 , 10).toUpperCase()}</td>
+                            <td>{order?.ref}</td>
                           </tr>
                           <tr>
                             <th>Order Date<span>:</span></th>

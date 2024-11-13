@@ -13,6 +13,9 @@ import { toast } from 'react-toastify';
 import { checkPromoCode } from '../../../Store/Client/couponSlice';
 import Loading from '../../../MainComponent/Loading/Loading'
 import CercleLoading from '../../../MainComponent/CercleLoading/CercleLoading';
+import { FaCheck } from "react-icons/fa";
+import SuccessOrder from '../../Components/SuccessOrder/SuccessOrder';
+
 export default function Cart() {
   const dispatch = useDispatch()
   
@@ -40,12 +43,13 @@ export default function Cart() {
 
   let subTotal = countShoppingCartTotalPrice(shoppingCart)
   let shipping = shippingCostHandler(methodSeleted, subTotal)
-  let totalPrice = (shipping + +(coupon?.discount ? coupon.type === "fixed" ? subTotal - coupon.discount : +subTotal*(1 - (+coupon.discount/100)) : subTotal)).toFixed(2)
+  let totalPrice = shipping + +(coupon?.discount ? coupon.type === "fixed" ? subTotal - coupon.discount : +subTotal*(1 - (+coupon.discount/100)) : subTotal)
   let numberOfItems = countShoppingCartItems(shoppingCart)
 
   let percentage = subTotal/methodSeleted?.rangeAmount?.min_amount*100
 
-  const checkPromoCodeHandler = () => {
+  const checkPromoCodeHandler = (e) => {
+    e.preventDefault()
     setCheckCode({checked: false, message: null})
     dispatch(checkPromoCode({promoCode})).unwrap()
     .then(docs => {
@@ -69,6 +73,8 @@ export default function Cart() {
     })
     .catch(err => console.log(err))
   }, [])
+
+
   if(!shoppingCart.length) return (
     <div className="Cart empty-cart">
         <h1 className="title">Oops,</h1>
@@ -91,10 +97,10 @@ if(checkout) return <Checkout coupon={coupon} shoppingCart={checkout} setCheckou
             <table>
             <tr>
                 <th>Product details</th>
-                <th>QUANTITY</th>
-                <th>PRICE</th>
-                <th>TOTAL</th>
-                <th>DELETE</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Delete</th>
             </tr>
             {shoppingCart.map((prod,i) => (
                 prod.variants.length === 1 ? (
@@ -124,7 +130,7 @@ if(checkout) return <Checkout coupon={coupon} shoppingCart={checkout} setCheckou
                 </td>
                 <td>
                     <div className="price">
-                    {prod.variants[0].salePrice}<span>mad</span>
+                    {(+prod.variants[0].salePrice).toFixed(2)}<span>mad</span>
                     </div>
                 </td>
                 <td>
@@ -179,19 +185,19 @@ if(checkout) return <Checkout coupon={coupon} shoppingCart={checkout} setCheckou
                         </td>
                         <td>
                         <div className="quantite">
-                            <div  disabled={v.quantityUser === 1} onClick={() => changeQuantityHandler("minus",v._id)} className="minus">
+                            <button  disabled={v.quantityUser === 1} onClick={() => changeQuantityHandler("minus",v._id)} className="minus">
                                 <BiMinus/>
-                            </div>
+                            </button>
                             <input disabled value={v.quantityUser} />
-                            <div  disabled={v.quantityUser === 10} onClick={() => changeQuantityHandler("plus",v._id)} className="plus">
+                            <button  disabled={v.quantityUser === 10} onClick={() => changeQuantityHandler("plus",v._id)} className="plus">
                             <BiPlus/>
-                            </div>
+                            </button>
                         </div>
             
                         </td>
                         <td>
                         <div className="price">
-                            {v.salePrice}<span>mad</span>
+                            {v.salePrice.toFixed(2)}<span>mad</span>
                         </div>
                         </td>
                         <td>
@@ -212,6 +218,13 @@ if(checkout) return <Checkout coupon={coupon} shoppingCart={checkout} setCheckou
             
             </table>
             </div>
+            <form onSubmit={checkPromoCodeHandler} className="promo-container">
+                <div className="promo-input">
+                    <input onChange={e => setPromoCode(e.target.value.toUpperCase())} value={promoCode} type="text" placeholder='Promo code' />
+                    <button disabled={couponLoading} className="apply-btn">Appliquer le code promo{couponLoading &&<CercleLoading absolute type="btn"/>}</button>
+                </div>
+                {checkCode.message && <div className={"message"+(checkCode.checked ? " success" : "")}>{checkCode.message}</div>}
+            </form>
             </div>
             <div className="order-summary">
             <div className="head">
@@ -227,26 +240,26 @@ if(checkout) return <Checkout coupon={coupon} shoppingCart={checkout} setCheckou
             <div className="title">Shipping</div>
             <select onChange={(e) => setMethodSeleted(shippingMethods.find(s => s._id === e.target.value))} name="shipping" id="shipping">
                 {shippingMethods.map(shipp => (
-                    <option selected={methodSeleted._id === shipp._id} value={shipp._id}>{shipp.name +" -- "+ (+shipp.cost ? shipp.cost + " Mad" : "Free")}</option>
+                    <option selected={methodSeleted._id === shipp._id} value={shipp._id}>{shipp.name +" -- "+ (+shipp.cost ? shipp.cost.toFixed(2) + " Mad" : "Free")}</option>
                 ))}
             </select>
             <span><b>Estimated delivery:</b> {methodSeleted?.estimated_delivery}</span>
-            {methodSeleted.rangeAmount?.min_amount && <>
-                <span><b>{methodSeleted.rangeAmount?.cost ? `Shipping ${methodSeleted.rangeAmount?.cost} MAD:` : "Free shipping:"}</b> from {methodSeleted.rangeAmount?.min_amount.toFixed(2)} MAD</span>
-                {subTotal < methodSeleted.rangeAmount?.min_amount && (
+            {methodSeleted?.rangeAmount?.min_amount && <>
+                <span><b>{methodSeleted.rangeAmount?.cost ? `Shipping ${methodSeleted.rangeAmount?.cost.toFixed(2)} MAD:` : "Free shipping:"}</b> from {methodSeleted.rangeAmount?.min_amount.toFixed(2)} MAD</span>
+                {/* {subTotal < methodSeleted.rangeAmount?.min_amount && ( */}
                     <span style={{
                         "--percentage": `${percentage < 100 ? percentage : 100}%`,
-                        }} className="amount-progress"><span>{subTotal}</span></span>
-                )}
+                        }} className="amount-progress"><span>{subTotal < methodSeleted.rangeAmount?.min_amount ? subTotal : <FaCheck/>}</span></span>
+                {/* )} */}
             </>}
             </div>
             </Loading>
-            <div className="box promo">
+            {/* <div className="box promo">
             <div className="title">Promo Code</div>
             <input onChange={e => setPromoCode(e.target.value.toUpperCase())} value={promoCode} type="text" placeholder='Enter your code' />
             {checkCode.message && <div className={"message"+(checkCode.checked ? " success" : "")}>{checkCode.message}</div>}
             <button disabled={couponLoading} onClick={checkPromoCodeHandler} className="apply">Apply{couponLoading &&<CercleLoading type="btn"/>}</button>
-            </div>
+            </div> */}
             <div className="total-footer">
             <div className="box-footer">
               <div className="title">Sub total</div>
@@ -255,16 +268,16 @@ if(checkout) return <Checkout coupon={coupon} shoppingCart={checkout} setCheckou
             {coupon?.discount && (
             <div className="box-footer">
                 <div className="title">Discount</div>
-                <div className="total">-{coupon.discount}{coupon.type === "fixed" ? <span>MAD</span> : <span>%</span>}</div>
+                <div className="total">-{coupon.discount.toFixed(2)}{coupon.type === "fixed" ? <span>MAD</span> : <span>%</span>}</div>
             </div>
             )}
             <div className="box-footer">
               <div className="title">Shipping</div>
-              <div className="total">{shipping ? <>{shipping}<span>mad</span></> : "Free"}</div>
+              <div className="total">{shipping ? <>{shipping.toFixed(2)}<span>mad</span></> : "Free"}</div>
             </div>
             <div className="box-footer">
               <div className="title">Total</div>
-              <div className="total">{totalPrice}<span>mad</span></div>
+              <div className="total">{totalPrice.toFixed(2)}<span>mad</span></div>
             </div>
           </div>
             <div onClick={() => setCheckout(shoppingCart)} className="checkout">Checkout</div>

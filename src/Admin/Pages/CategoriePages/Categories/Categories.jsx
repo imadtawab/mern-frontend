@@ -158,7 +158,12 @@ export default function Categories() {
     setDateFilter({from: null,to: null})
     setPublishFilter (null)
     setSearchFilter(null)
-    filterQuerysHandler({}, dispatchFunc, pagination.step, true)
+    let filterObject = {}
+    filterObject.search = null
+    filterObject.publish = null
+    filterObject.from = null
+    filterObject.to = null  
+    filterQuerysHandler(filterObject, dispatchFunc, pagination.step, true)
   }
 
   return (

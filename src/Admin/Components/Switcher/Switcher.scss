@@ -39,7 +39,7 @@
             position: absolute;
             left: 2px;
             top: 2px;
-            background: #fff;
+            background: var(--white-color);
             //   transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: switcherOut .3s ease-in-out forwards;
             @keyframes switcherOut {

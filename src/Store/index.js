@@ -14,6 +14,8 @@ import shippingSlice from './Admin/shippingSlice';
 import client_shippingSlice from './Client/shippingSlice';
 import couponSlice from './Admin/couponSlice';
 import client_couponSlice from './Client/couponSlice'
+import storeSettingsSlice from './Admin/storeSettingsSlice'
+import client_storeSettingsSlice from './Client/storeSettingsSlice'
 
 const store = configureStore({
     reducer: {
@@ -27,12 +29,14 @@ const store = configureStore({
         order: orderSlice,
         shipping: shippingSlice,
         coupon: couponSlice,
+        store_settings: storeSettingsSlice,
 
         client_category: client_categorySlice,
         client_attribute: client_attributeSlice,
         client_product: client_productSlice,
         client_shipping: client_shippingSlice,
-        client_coupon: client_couponSlice
+        client_coupon: client_couponSlice,
+        client_settings: client_storeSettingsSlice,
         // products: productsSlice,
         // users: usersSlice,
         // orders: orderSlice,

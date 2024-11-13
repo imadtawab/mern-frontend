@@ -2,9 +2,9 @@ import { BsFillExclamationOctagonFill } from 'react-icons/bs'
 import './InputBox.scss'
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 
-export default function InputBox({ disabled, slugColor, slugBg,autoComplete, autoFocus, autoCapitalize, checkValueInDB, error, type, name, id, placeholder, label , value , personelInput,onChange,required , mx_width , flex , pd , leftSlug , rightSlug , borderSlug , slugWrap}) {    
+export default function InputBox({row, disabled, slugColor, slugBg,autoComplete, autoFocus, autoCapitalize, checkValueInDB, error, type, name, id, placeholder, label , value , personelInput,onChange,required , mx_width , flex , pd , leftSlug , rightSlug , borderSlug , slugWrap}) {    
   return (
-      <div style={flex ? {flex: +flex} : {}} className={"InputBox" + (error ? " error" : "") + (mx_width ? " mx_width" : "") + (pd === "none" ? " pd-none" : "")}>
+      <div style={flex ? {flex: +flex} : {}} className={"InputBox" + (error ? " error" : "") + (mx_width ? " mx_width" : "") + (pd === "none" ? " pd-none" : "") + (row ? " row" :"")}>
           {label && (
             <>
                 <label htmlFor={id}>{label}{required && <div className="required">*</div>}</label>

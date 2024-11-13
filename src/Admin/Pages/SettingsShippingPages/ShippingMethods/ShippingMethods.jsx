@@ -32,6 +32,7 @@ export default function ShippingMethods() {
   }, [])
 
   const changeVisibilityHandle = (_id, publish) => {
+    if(methods.filter(a => a.publish).length === 1 && publish) return toast.info("You can't not private this method, the min number of methods has 1")
     let dispatchFunc = () => dispatch(changeVisibility({_id, publish})).unwrap()
     .then(docs => {
       toast.success(docs.message)
@@ -46,6 +47,7 @@ export default function ShippingMethods() {
     })
   }
   const deleteShippingMethodHandler = (_id) => {
+    if(methods.filter(a => a.publish).length === 1 && methods.filter(a => a.publish)[0]._id === _id) return toast.info("You can't not deleted, the min number of methods has 1")
     let dispatchFunc = () => dispatch(deleteShippingMethod({_id})).unwrap()
     .then(docs => {
       toast.success(docs.message)
@@ -63,7 +65,7 @@ export default function ShippingMethods() {
   return (
     <div className='ShippingMethods'>
       <SectionStructure title="All Methods" loading={isLoadingPage}>
-      <div className="methods-contailer table-container">
+      <div className="methods-container table-container">
                         <table>
                             <thead>
                                 <tr>

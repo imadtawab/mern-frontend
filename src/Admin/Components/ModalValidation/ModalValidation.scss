@@ -5,7 +5,7 @@
     bottom: 0;
     right: 0;
     z-index: 100000000000000;
-    background: #00000012;
+    background: var(--popup-bg);
     justify-items: center;
     width: 100vw;
     height: 100vh;
@@ -60,7 +60,7 @@
     //     display: grid;
     // }
     .modal-box{
-        background: #fff;
+        background: var(--white-color);
         border-radius: 12px;
         box-shadow: 0 0 17px 0px rgba(0, 0, 0, 0.3803921569);
         padding: 15px;
@@ -85,7 +85,7 @@
             right: 5px;
             top: 5px;
             font-size: 40px;
-            color: #444;
+            color: var(--text-color);
         }
         &.info-modal{
             .modal-icon{
@@ -99,7 +99,7 @@
     .modal-icon{
         margin: 13px auto 0;
         background: #d9b272;
-        color: #fff;
+        color: var(--white-color);
         border-radius: 50%;
         font-size: 60px;
         width: 70px;
@@ -109,20 +109,20 @@
     }
         .modal-title{
             font-weight: bold;
-            color: #1c99a3;
+            color: var(--main-color);
             font-size: 25px;
             padding: 10px 15px;
         }
         .modal-info{
-            color: #333131;
+            color: var(--text-color);
             padding: 7px;
             font-size: 14px;
         }
-        .resend-p{
-            font-size: 14px;
-        margin-top: 15px;
-        color: #737373
-        }
+        // .resend-p{
+        //     font-size: 14px;
+        // margin-top: 15px;
+        // color: #737373
+        // }
         .modal-controllers{
             display: flex;
             justify-content: center;

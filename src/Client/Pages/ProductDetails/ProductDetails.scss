@@ -101,7 +101,7 @@
     margin-bottom: 20px;
             }
             h1{
-                color: var(--dark-color);
+                color: var(--text-color);
     font-weight: 500;
     font-size: 24px;
     margin-bottom: 15px;
@@ -115,7 +115,7 @@
                 .salePrice,.originalPrice{
                     font-weight: 700;
                     font-size: 20px;
-                    color: var(--dark-color);
+                    color: var(--text-color);
                     text-wrap: nowrap;
                     span{
                         text-transform: uppercase;
@@ -169,7 +169,7 @@
                         }
                     }
                     .name{
-                        color: var(--dark-color);
+                        color: var(--text-color);
                         font-weight: 600;
                         font-size: 18px;
                     }
@@ -212,7 +212,7 @@
                                 // align-items: center;
                                 // text-align: center;
                                 // border-radius: 5px;
-                                // color: var(--dark-color);
+                                // color: var(--text-color);
                                 // transition: all 0.3s;
                                 // font-size: 18px;
                                 border: 1px solid #b1b1b1;
@@ -375,14 +375,14 @@
                     // }
                 }
                 .favorate{
-                    // color: var(--dark-color);
+                    // color: var(--text-color);
                     // background: #ddd;
                     // display: grid;
                     // place-content: center;
                     // border-radius: 50%;
                     // padding: 8px;
                     // font-size: 28px;
-                    color: var(--dark-color);
+                    color: var(--text-color);
     /* background: #ddd; */
     display: grid;
     place-content: center;
@@ -408,12 +408,6 @@
             color: #414141;
             font-size: 20px;
             margin-bottom: 15px;
-        }
-        &.reviews-section {
-            .review-title {
-                text-transform: uppercase;
-                font-size: 14px;
-            }
         }
     }
 
