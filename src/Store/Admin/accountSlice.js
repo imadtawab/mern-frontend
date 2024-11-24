@@ -217,4 +217,8 @@ const accountSlice = createSlice({
 })
 
 export const accountActions = accountSlice.actions
+<<<<<<< HEAD
 export default accountSlice.reducer
+=======
+export default accountSlice.reducer
+>>>>>>> origin/main
