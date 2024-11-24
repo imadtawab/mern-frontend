@@ -1,19 +1,14 @@
 import { createSlice , createAsyncThunk } from "@reduxjs/toolkit"
 import { adminAPI } from '../../API/axios-global'
 import { avatarHandle } from "../../Admin/Utils/accountUtils"
+import decodedCookies from "../../Admin/Utils/cookieUtils"
 
 export const registerAccount = createAsyncThunk("registerAccount" ,
   async (user, thunkAPI) => {
       const {rejectWithValue} = thunkAPI
       return adminAPI.post("/account/register",user)
-      .then(docs => {
-        console.log(data, 11)
-        return docs.data
-      })
-      .catch(err => {
-        console.log(err, 22)
-        return rejectWithValue(err.response.data || err)
-      })
+      .then(docs => docs.data)
+      .catch(err => rejectWithValue(err.response.data || err))
   })
 export const resendEmail = createAsyncThunk("resendEmail" ,
   async (email, thunkAPI) => {
@@ -52,11 +47,15 @@ export const forgotChangePassword = createAsyncThunk("forgotChangePassword" ,
       .catch(err => rejectWithValue(err.response.data || err))
 })
 export const addAuthToState = createAsyncThunk("addAuthToState",
-  async (_auth, thunkAPI) => {
+  async (_, thunkAPI) => {
+    let cookies = decodedCookies()
+    console.log(cookies._auth,9999999999)
     const {rejectWithValue} = thunkAPI
-    return adminAPI.get("/account/auth/addAuthToState",{
-      headers: {"Authorization" : _auth},
-    }).then(docs => docs.data)
+    return adminAPI.get("/account/auth/addAuthToState"
+    //   ,{
+    //   headers: {"Authorization" : cookies?._auth},
+    // }
+  ).then(docs => docs.data)
     .catch(err => rejectWithValue(err.response.data || err))
   })
 
@@ -142,7 +141,6 @@ const accountSlice = createSlice({
       })
       .addCase(loginAccount.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload)
         state.user = {
           ...action.payload.user,
           avatar: avatarHandle(action.payload.user.avatar)
@@ -218,10 +216,5 @@ const accountSlice = createSlice({
     },
 })
 
-<<<<<<< HEAD
-export const counterActions = accountSlice.actions
+export const accountActions = accountSlice.actions
 export default accountSlice.reducer
-=======
-// export const counterActions = accountSlice.actions
-export default accountSlice.reducer
->>>>>>> f9863acc63935a496fae6557fe93db3a0f74b76f

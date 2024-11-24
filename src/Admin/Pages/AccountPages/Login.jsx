@@ -22,6 +22,8 @@ export default function Login() {
     e.preventDefault()
     dispatch(loginAccount({email, password})).unwrap().then((docs) => {
       toast.success("Login has been successfully.")
+      // window.cookieStore.set("_authh", "aaaaaaaaaaa")
+      document.cookie = `_auth=${docs.token}; path=/; max-age=${24 * 60 * 60 * 1000}`; // 1 day in seconds
       navigate("/admin")
     }).catch(err => toast.error(err.message))
   }
