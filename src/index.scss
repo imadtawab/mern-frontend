@@ -49,7 +49,8 @@ img {
 
   --border-color: #e3e2e2;
   --border: 1px solid var(--border-color);
-  --sidebar-color: #202939;
+  // --sidebar-color: #202939;
+  --sidebar-color: var(--lightest-grey);
   --popup-bg: rgba(0, 0, 0, 0.7411764706);
 }
 body.darkmode {
@@ -71,7 +72,7 @@ body.darkmode {
 
   --border-color: #4a4a4a;
   --border: 1px solid var(--border-color);   /* Dark border */
-  --sidebar-color: #141924;      /* Dark sidebar */
+  --sidebar-color: var(--white-color);      /* Dark sidebar */
   --popup-bg: #555555a6;  /* Lightened popup background */
 }
 

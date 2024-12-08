@@ -17,6 +17,7 @@ import { changeOrderStatus, deleteOrderStatus, getOrderDetails, newPersonalNote 
 import { NavLink } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Invoice from '../../../Components/Invoice/Invoice'
+import ShadowLoading from '../../../../MainComponent/ShadowLoading/ShadowLoading'
 
 export default function OrderDetails() {
     const {id} = useParams()
@@ -48,7 +49,7 @@ export function OrderDetailsHandle({order, setOrder , key}) {
     // const [backStatus , setBackStatus]  =useState("")
     // const [nowStatus , setNowStatus] = useState("")
     const [status , setStatus] = useState([null, null, null])
-    const {isLoadingPage} = useSelector(s => s.order)
+    const {isLoadingPage, isLoading} = useSelector(s => s.order)
 
     const dispatch = useDispatch()
 
@@ -418,6 +419,7 @@ export function OrderDetailsHandle({order, setOrder , key}) {
                 </div>
             </div>
                 <Invoice order={order} setPrintActive={setPrintActive} print={printActive}/>
+                {isLoading && <ShadowLoading/>}
             </PageStructure>
     </>
   )

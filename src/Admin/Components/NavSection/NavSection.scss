@@ -23,7 +23,8 @@
                 position: relative;
                 &:hover,&.active{
                         // background: #d3d3d3; // ...
-                        background: var(--grey);
+                        // background: var(--grey);
+                        background: var(--main-color);
                         color: var(--sidebar-color);
                 }
                 &::after,&::before{

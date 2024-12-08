@@ -9,7 +9,9 @@
     position: fixed;
     // border-right: 2px solid #eee;
     z-index: 20;
-    color: var(--grey);
+    // color: var(--grey);
+    color: var(--text-color);
+
     @media (min-width: 650px) {
         &.closed{
             position: absolute;

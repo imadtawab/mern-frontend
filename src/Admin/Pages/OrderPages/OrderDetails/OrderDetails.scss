@@ -318,6 +318,8 @@
     .back,
     .next {
       position: relative;
+      display: grid;
+      cursor: pointer;
       &:not(.disabled):hover {
         &::before,
         &::after {

@@ -71,7 +71,6 @@ const initState = {
     isLoading: false,
     isLoadingPage: false,
     isLoadingSlug: false,
-    isLoadingPersonalNote: false
 }
 const orderSlice = createSlice({
     name: "order",
@@ -99,6 +98,16 @@ const orderSlice = createSlice({
       .addCase(changeOrderStatus.rejected, (state, action) => {
         state.isLoading = false;
       })
+            // Change Visibility
+            .addCase(deleteOrderStatus.pending, (state) => {
+              state.isLoading = true;
+            })
+            .addCase(deleteOrderStatus.fulfilled, (state, action) => {
+              state.isLoading = false;
+            })
+            .addCase(deleteOrderStatus.rejected, (state, action) => {
+              state.isLoading = false;
+            })
       // Change Visibility
       .addCase(deleteOrder.pending, (state) => {
         state.isLoading = true;
@@ -141,13 +150,13 @@ const orderSlice = createSlice({
       })
       // GET newPersonalNote
       .addCase(newPersonalNote.pending, (state) => {
-        state.isLoadingPersonalNote = true;
+        state.isLoading = true;
       })
       .addCase(newPersonalNote.fulfilled, (state, action) => {
-        state.isLoadingPersonalNote = false;
+        state.isLoading = false;
       })
       .addCase(newPersonalNote.rejected, (state, action) => {
-        state.isLoadingPersonalNote = false;
+        state.isLoading = false;
       })
       // GET orders tracking
       .addCase(getOrdersTrackingStatus.pending, (state) => {
