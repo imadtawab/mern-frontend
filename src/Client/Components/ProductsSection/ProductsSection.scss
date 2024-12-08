@@ -1,5 +1,165 @@
+.ProductsSection {
+    .choices-section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7019607843);
+        width: 100vw;
+        height: 100vh;
+        z-index: 11111111111111;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        .choices-container {
+            background: #fff;
+    border-radius: 8px;
+    width: 500px;
+    margin: auto;
+    max-width: 95%;
+    // min-width: 300px;
+    .top-choices {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #0000001b;
+        > h2 {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .close-btn {
+            display: contents;
+            font-weight: 600;
+            font-size: 25px;
+            cursor: pointer;
+        }
+    }
+    .content-choices {
+        padding: 20px;
+        .variant{
+            // display: block;
+            // gap: 12px;
+            // align-items: center;
+            // margin-top: 25px;
+            // flex: 1 1;
+            // min-width: 200px;
+            // background: #f5f5f5;
+            // border-radius: 5px;
+            // padding: 10px 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            .parent-variants{
+                display: flex;
+                gap: 10px;
+                margin: 15px 0 10px 15px;
+                flex-wrap: wrap;
+                span{
+                    cursor: pointer;
+                }
+            }
+            .name{
+                color: var(--text-color);
+                font-weight: 600;
+                font-size: 16px;
+            }
+            &.colorSpans{
+//                       display: block;
+// gap: 12px;
+// align-items: center;
+// margin-top: 25px;
+// flex: 1 1;
+// min-width: 200px;
+// background: #f5f5f5;
+// border-radius: 5px;
+// padding: 10px 15px;
+            .parent-variants{
+                    // display: flex;
+                    // gap: 10px;
+                    // margin: 15px 0 10px 15px;
+                    span{
+                        // width: 25px;
+                        // height: 25px;
+                        // background: #374151;
+                        // border-radius: 50%;
+                        // border: 2px solid #d1d5db;
+                        min-width: 28px;
+                        padding: 0 3px;
+                        height: 28px;
+                        background: #374151;
+                        border-radius: 50%;
+                        border: 1px solid #d1d5db;
+                        display: block;
+                        position: relative;
+                        
+                        &:before {
+                            border-radius: 4px;
+                            content: "";
+                            width: 0;
+                            position: absolute;
+                            left: 0;
+                            bottom: -8px;
+                            height: 3px;
+                            background: #424242;
+                            transition: all .3s;
+                        }
+                        &.active{
+                            
+                        // box-shadow: inset 0px 0px 0px 3px #fff;
+                        // border: 3px dotted #fff;
+                                &::before {
+                                    width: 100%;
+                                }
+                        }
+                    }
+                }
+            }
+            &.checkBox{
+                // color: red;
+                .parent-variants{
+                    span{
+                        border: 1px solid #999;
+                        min-width: 30px;
+                        padding: 0 8px;
+                        height: 30px;
+display: grid;
+align-items: center;
+text-align: center;
+border-radius: 5px;
+color: var(--text-color);
+transition: all .3s;
+                        &.active{
+                            color: #fff;
+                            // border-color: var(--main-color);
+                            // background: var(--main-color);
+                            border-color: var(--main-color);
+                            background: var(--main-color);
+                        }
+                    }
+                }
+                .SelectBox{
+                    margin: 0;
+                }
+                select{
+                    width: 100px;
+text-transform: uppercase;
+                    option{
+                        // color: red;
+                    }
+                }
+            }
+            &.dropDown {
+                .parent-variants {
+                    .SelectBox {
+                    padding: 0;
+                    }
+                }
+            }
+        }
+    }
 
-<<<<<<< HEAD
     .prices {
         margin: 0 20px 20px 0;
     display: block;
@@ -694,5 +854,3 @@
         // }
     }
 }
-=======
->>>>>>> origin/main
