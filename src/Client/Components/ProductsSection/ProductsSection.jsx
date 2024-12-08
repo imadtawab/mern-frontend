@@ -16,6 +16,7 @@ import Loading from '../../../MainComponent/Loading/Loading'
 import { ratingStarsHandler } from '../../Utils/productUtils'
 import RatingStars from '../RatingStars/RatingStars'
 
+
 export default function ProductsSection({filter, wishList, title, subTitle, products, setProducts, emptyMessage}) {
     const dispatch = useDispatch()
     const [openFilter , setOpenFilter] = useState(false)
