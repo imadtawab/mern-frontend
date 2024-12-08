@@ -25,10 +25,13 @@ export default function ProductsSection({filter, wishList, title, subTitle, prod
     const [prices, setPrices] = useState(null)
     const [itemsInWishList, setItemsWishList] = useState([])
 
+    const [itemClickedForShowChoices, setItemClickedForShowChoices] = useState(null)
 
   const addToCartHandle = (e,choice , prod) => {
     e.preventDefault()
-    if(choice) return dispatch(getProductDetails(prod.slug)).unwrap().then(docs => {
+    if(choice) {
+      setItemClickedForShowChoices(prod._id)
+       return dispatch(getProductDetails(prod.slug)).unwrap().then(docs => {
       let options = {}
       docs.data.options.forEach(option => {
         options[option._id] = option.values[0]._id
@@ -37,6 +40,7 @@ export default function ProductsSection({filter, wishList, title, subTitle, prod
       setPrices(docs.data.prices)
       setChoices(docs.data)
     }).catch(err => console.log(err.message))
+  }
     
     let variant
     if(!choice && !prod) {
@@ -194,9 +198,9 @@ export default function ProductsSection({filter, wishList, title, subTitle, prod
                           <div className="image">
                               <img loading='lazy' src={`${process.env.REACT_APP_SERVER_DOMAINE}/media/${prod.media.images[0]}`} alt={prod.name} />
                               {/* <img loading='lazy' src={prod.image} alt={prod.name} /> */}
-                              <div onClick={e => addToCartHandle(e , prod.variantsOwner.length, prod)} className="buy">
+                              <div onClick={e => addToCartHandle(e , prod.variantsOwner.length, prod)} className={"buy"+ (isLoadingProduct && itemClickedForShowChoices === prod._id ? " active" : "")}>
                                 <span>{prod.variantsOwner.length > 0 ? "Choix des options" : "Ajouter au panier"}</span>
-                                <span>{isLoadingProduct ? <CercleLoading type="btn"/> : <BsCart3/>}</span>
+                                <span>{(isLoadingProduct && itemClickedForShowChoices === prod._id) ? <CercleLoading type="btn"/> : <BsCart3/>}</span>
                                 </div>
                           </div>
                           <p>{prod.categoryOwner.name}</p>
