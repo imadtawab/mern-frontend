@@ -56,15 +56,9 @@ export default function Header({setSideBarShow,sideBarShow, logoutHandle}) {
               {/* @@@@@@ */}
               {/* {user?.storeOwner?.name && <NavLink target="_blanc" className="storeName" to={`${window.location.protocol}//${user?.storeOwner?.name}.${window.location.host}`}><IoStorefront />{user?.storeOwner?.name}</NavLink>} */}
               {user?.storeOwner?.name && <NavLink target="_blanc" className="storeName" to={window.location.origin}><IoStorefront />{user?.storeOwner?.name}</NavLink>}
-<<<<<<< HEAD
         </div>
               <ul className={`menu ${profileMenu ? " active" : ""}`}>
             <li>
-=======
-            </div>
-            <ul className={`menu ${profileMenu ? " active" : ""}`}>
-              <li>  
->>>>>>> origin/main
                 <NavLink to="/admin/account/profile">
                 <FaUserLarge/>
                   Profile
