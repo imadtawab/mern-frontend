@@ -237,6 +237,17 @@ text-transform: uppercase;
                     margin-right: auto;
                     border-radius: 10px;
                     width: -webkit-fill-available;
+                    .buy.active {
+                        transform: translateY(0);
+                        span {
+                            &:nth-child(1) {
+                                transform: translate(-50% , -250%);
+                            }
+                            &:nth-child(2) {
+                                transform: translate(-50% , -50%);
+                            }
+                        }
+                    }
                     &:hover{
                         .buy {
                         transform: translateY(0);
@@ -446,7 +457,6 @@ text-transform: uppercase;
                         overflow: hidden;
                         border-radius: 0 0 10px 10px;
                         &:hover {
-                            opacity: 1;
                             span {
                                 &:nth-child(1) {
                                     transform: translate(-50% , -250%);
