@@ -51,7 +51,7 @@ export default function PaginationTable({pagination , dispatchFunc}) {
     <div className="PaginationTable">
     <div className="result">
         <select name='selectStep' value={`${step}`} onChange={stepHandler}>
-          {[1,2,3,4,5,10,15,20,"all"].map(s => (
+          {[5,10,15,20,"all"].map(s => (
             <option key={s} value={s}>{s}</option>
           ))}
         </select>
